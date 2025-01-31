@@ -20,19 +20,24 @@ jobs:
           distribution: 'temurin'
           java-version: 21
 
-      - name: Set up Maven
-        uses: stCarolas/setup-maven@v5
-        with:
-          maven-version: 3.9.8
+      - name: Publish package
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # See: https://github.com/actions/cache/blob/main/examples.md#java---maven
-      - name: Maven cache and restore deps
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+#       - name: Set up Maven
+#         uses: stCarolas/setup-maven@v5
+#         with:
+#           maven-version: 3.9.8
 
-      - name: Build with Maven
-        run: mvn clean test -B -U
+#       # See: https://github.com/actions/cache/blob/main/examples.md#java---maven
+#       - name: Maven cache and restore deps
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.m2/repository
+#           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-maven-
+#
+#       - name: Build with Maven
+#         run: mvn clean test -B -U
