@@ -203,7 +203,7 @@
             </dependency>
             <dependency>
                 <groupId>org.kimsoungryoul</groupId>
-                <artifactId>aerospike-client-java-reactive</artifactId>
+                <artifactId>aerospike-reactor-client</artifactId>
                 <version>${aerospike-reactor-client}</version>
             </dependency>
 <!--            <dependency>-->
