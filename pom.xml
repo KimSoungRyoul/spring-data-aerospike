@@ -164,7 +164,6 @@
         <url>https://github.com/KimSoungRyoul/spring-data-aerospike</url>
     </scm>
 
-
     <distributionManagement>
         <repository>
             <id>github</id>
