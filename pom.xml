@@ -165,11 +165,13 @@
     </scm>
 
     <distributionManagement>
+
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/KimSoungRyoul/spring-data-aerospike</url>
         </repository>
+
 <!--        <repository>-->
 <!--            <id>ossrh</id>-->
 <!--            <name>Central Repository OSSRH</name>-->
@@ -206,6 +208,7 @@
                 <artifactId>aerospike-reactor-client</artifactId>
                 <version>${aerospike-reactor-client}</version>
             </dependency>
+
 <!--            <dependency>-->
 <!--                <groupId>com.aerospike</groupId>-->
 <!--                <artifactId>aerospike-reactor-client</artifactId>-->
@@ -445,12 +448,15 @@
         </plugins>
     </build>
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>spring-libs-snapshot</id>-->
-<!--            <url>https://repo.spring.io/libs-snapshot</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/KimSoungRyoul/aerospike-reactor-client</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <pluginRepositories>
         <pluginRepository>
