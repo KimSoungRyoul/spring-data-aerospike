@@ -8,7 +8,7 @@
 
     <groupId>org.kimsoungryoul</groupId>
     <artifactId>spring-data-aerospike</artifactId>
-    <version>5.0.0</version>
+    <version>5.0.0alpha</version>
     <name>Spring Data Aerospike</name>
     <organization>
         <name>Aerospike Inc.</name>
@@ -33,7 +33,7 @@
         <maven.javadoc.plugin>3.3.0</maven.javadoc.plugin>
         <maven.gpg.plugin>1.6</maven.gpg.plugin>
         <aerospike-client-jdk21>9.0.3</aerospike-client-jdk21>
-        <aerospike-reactor-client>9.0.2</aerospike-reactor-client>
+        <aerospike-reactor-client>9.0.2alpha</aerospike-reactor-client>
         <reactor-test>3.7.2</reactor-test>
         <embedded-aerospike>3.1.10</embedded-aerospike>
         <jodatime>2.13.0</jodatime>
@@ -202,10 +202,15 @@
                 <version>${aerospike-client-jdk21}</version>
             </dependency>
             <dependency>
-                <groupId>com.aerospike</groupId>
-                <artifactId>aerospike-reactor-client</artifactId>
+                <groupId>org.kimsoungryoul</groupId>
+                <artifactId>aerospike-client-java-reactive</artifactId>
                 <version>${aerospike-reactor-client}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.aerospike</groupId>-->
+<!--                <artifactId>aerospike-reactor-client</artifactId>-->
+<!--                <version>${aerospike-reactor-client}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
@@ -255,8 +260,9 @@
             <artifactId>aerospike-client-jdk21</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.aerospike</groupId>
+            <groupId>org.kimsoungryoul</groupId>
             <artifactId>aerospike-reactor-client</artifactId>
+            <version>9.0.2alpha</version>
         </dependency>
         <dependency>
             <groupId>com.esotericsoftware</groupId>
