@@ -4,7 +4,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.aerospike</groupId>
+    <packaging>jar</packaging>
+
+    <groupId>org.kimsoungryoul</groupId>
     <artifactId>spring-data-aerospike</artifactId>
     <version>5.0.0</version>
     <name>Spring Data Aerospike</name>
@@ -20,7 +22,7 @@
     </parent>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,7 +32,7 @@
         <spring-tx>6.2.2</spring-tx>
         <maven.javadoc.plugin>3.3.0</maven.javadoc.plugin>
         <maven.gpg.plugin>1.6</maven.gpg.plugin>
-        <aerospike-client-jdk8>9.0.3</aerospike-client-jdk8>
+        <aerospike-client-jdk21>9.0.3</aerospike-client-jdk21>
         <aerospike-reactor-client>9.0.2</aerospike-reactor-client>
         <reactor-test>3.7.2</reactor-test>
         <embedded-aerospike>3.1.10</embedded-aerospike>
@@ -158,19 +160,24 @@
 
     <scm>
         <connection>scm:git:git://github.com/spring-projects/spring-data-aerospike.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:aerospike/spring-data-aerospike.git</developerConnection>
-        <url>https://github.com/aerospike/spring-data-aerospike</url>
+        <developerConnection>scm:git:ssh://git@github.com:kimsoungryoul/spring-data-aerospike.git</developerConnection>
+        <url>https://github.com/KimSoungRyoul/spring-data-aerospike</url>
     </scm>
 
+
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/KimSoungRyoul/spring-data-aerospike</url>
         </repository>
+<!--        <repository>-->
+<!--            <id>ossrh</id>-->
+<!--            <name>Central Repository OSSRH</name>-->
+<!--            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+<!--        </repository>-->
+
+
     </distributionManagement>
 
     <dependencyManagement>
@@ -185,10 +192,15 @@
                 <artifactId>spring-tx</artifactId>
                 <version>${spring-tx}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.aerospike</groupId>-->
+<!--                <artifactId>aerospike-client-jdk8</artifactId>-->
+<!--                <version>${aerospike-client-jdk8}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>com.aerospike</groupId>
-                <artifactId>aerospike-client-jdk8</artifactId>
-                <version>${aerospike-client-jdk8}</version>
+                <artifactId>aerospike-client-jdk21</artifactId>
+                <version>${aerospike-client-jdk21}</version>
             </dependency>
             <dependency>
                 <groupId>com.aerospike</groupId>
@@ -235,9 +247,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.aerospike</groupId>-->
+<!--            <artifactId>aerospike-client-jdk8</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.aerospike</groupId>
-            <artifactId>aerospike-client-jdk8</artifactId>
+            <artifactId>aerospike-client-jdk21</artifactId>
         </dependency>
         <dependency>
             <groupId>com.aerospike</groupId>
@@ -375,18 +391,35 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven.gpg.plugin}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                    <argLine>
+                        --add-opens java.base/java.util=ALL-UNNAMED
+                        --add-opens java.base/java.net=ALL-UNNAMED
+                        --add-opens java.base/java.math=ALL-UNNAMED
+                        --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED
+                        --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+                    </argLine>
+                </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-gpg-plugin</artifactId>-->
+<!--                <version>${maven.gpg.plugin}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>sign-artifacts</id>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>sign</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -407,12 +440,12 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>spring-libs-snapshot</id>
-            <url>https://repo.spring.io/libs-snapshot</url>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>spring-libs-snapshot</id>-->
+<!--            <url>https://repo.spring.io/libs-snapshot</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
     <pluginRepositories>
         <pluginRepository>
